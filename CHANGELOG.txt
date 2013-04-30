@@ -1,0 +1,15 @@
+Changelog...
+8-13-08 - 0.1 command line implementation
+8-15-08 - 0.2 added pretty decent GUI support
+8-16-08 - 0.3 added config support
+8-23-08 - 0.4 added multi-line regex support by reading the text in and then subing on it rather
+  then line by line, also added support for space and comma separation for ext, broke out the gui
+  to its own file, to make maintainence easier. Added the Cancel and Yes to all buttons on the
+  confirmation dialog
+9-08-08 - fixed a few bugs, fixed where replace was smaller than find it wasn't truncating the file
+  when the file was getting re-written causing leftover bits at the end of the file. Also fixed cancel
+  not actually cancelling anything, and put the filepath in the confirm dialog now
+
+4-29-13 - updated this to be a little more modern, moved the changelog
+comments into this file, this will probably be the last changelog entry since
+git commit comments and the repo history will take the place of a changelog
