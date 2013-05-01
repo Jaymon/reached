@@ -27,12 +27,13 @@ class Dialog(object):
         filepath -- string -- the file path
         '''
         print "*" * 80
-        print "*    Change"
+        print "*    {}".format(filepath)
+        print "*    Change:"
         print "*" * 80, self.nl
         print "\t", old_line.encode('utf-8')
         print self.nl
         print "*" * 80
-        print "*    To"
+        print "*    To:"
         print "*" * 80, self.nl
         print "\t", new_line.encode('utf-8')
         print self.nl

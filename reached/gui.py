@@ -177,7 +177,7 @@ class Dialog(ui.Dialog):
 class Gui(object):
     """This is the main GUI"""
   
-    def __init__(self, fr, basedir, ext, find, replace, silent):
+    def __init__(self, fr, basedir, ext, find, replace, silent, find_options, *args, **kwargs):
         self.tk = Tkinter.Tk()
         self.tk.protocol("WM_DELETE_WINDOW", self.destroy)
         self.tk.bind("<Return>", self.submit)
@@ -201,6 +201,9 @@ class Gui(object):
         self.basedir = basedir
         self.ext = ext
         self.silent = silent
+        self.find_options = find_options
+        self.args = args
+        self.kwargs = kwargs
 
         """Set the Window Title"""
         self.tk.title("Reached - Find / Replace")
@@ -298,7 +301,17 @@ class Gui(object):
         self.silent = self.sText.get()
 
         # we take our passed in class instance, and invoke it here
-        self.fr.find(self.basedir, self.ext, self.find, self.replace, self.silent, dialog=Dialog(top_frame))
+        self.fr.find(
+            self.basedir,
+            self.ext,
+            self.find,
+            self.replace,
+            self.silent,
+            dialog=Dialog(top_frame),
+            find_options=self.find_options,
+            *self.args,
+            **self.kwargs
+        )
         self.tk.wait_window(top_frame)
       
     def destroy(self,event = None):

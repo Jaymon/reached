@@ -29,7 +29,8 @@ You can also invoke it with a gui if you have TKinter Python bindings installed
 
     $ reached --gui
 
-It will fail spectacularly if you don't have the TKinter modules installed.
+It will fail spectacularly if you don't have the TKinter modules installed. The GUI
+also doesn't have the capability to set flags like ignore case, etc.
 
 See all the options:
 
@@ -43,7 +44,7 @@ you can do that by running:
 
     $ reached --find=foo --replace=bar --dir=/path/to/folder
 
-Reached will prompt for each replacement, so you don't have to worry about it changing something
+`Reached` will prompt for each replacement, so you don't have to worry about it changing something
 you didn't mean to change.
 
 ## License
