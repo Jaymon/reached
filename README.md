@@ -35,6 +35,16 @@ See all the options:
 
     $ reached --help
 
+## Example
+
+Let's say you have a folder of 500 python files and you have changed a module's name
+from foo to bar, so you need to change all `import foo` statements to `import bar` statements,
+you can do that by running:
+
+    $ reached --find=foo --replace=bar --dir=/path/to/folder
+
+Reached will prompt for each replacement, so you don't have to worry about it changing something
+you didn't mean to change.
 
 ## License
 
