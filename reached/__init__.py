@@ -11,12 +11,15 @@ import codecs
 
 import ui
 
-__version__ = "0.7"
+__version__ = "0.7.2"
 
 class FindAndReplace(object):
     def find(self, basedir, ext, find, replace, silent, dialog, find_options=0, dry_run=False, *args, **kwargs):
         '''
         recursively check every file and subfolder for the find and replace string...
+
+        NOTE: I just took out code to make ext optional because if it isn't there then things
+        like .pyc get searched, which is messy, so for now, it is required
         '''
         self.silent = silent
         self.replace_text = replace.decode('utf-8')
@@ -64,9 +67,15 @@ class FindAndReplace(object):
                     self.dialog.update(msg)
                     # http://docs.python.org/2/howto/unicode.html
                     # we use r+ so we don't truncate the file
-                    f = codecs.open(self.filepath, encoding='utf-8', mode='r+')
-                    self.text = f.read()
-                    self.text_changes = 0
+                    try:
+                        f = codecs.open(self.filepath, encoding='utf-8', mode='r+')
+                        self.text = f.read()
+                        self.text_changes = 0
+                    except UnicodeDecodeError:
+                        # file failed to be read, maybe a binary file?
+                        msg = u"Could not read {}, skipping!".format(name)
+                        self.dialog.update(msg)
+                        continue
           
                     # do the actual find and replace...
                     try:  
@@ -174,7 +183,6 @@ def console():
         'find': options.find,
         'replace': options.replace,
         'silent': options.silent,
-        'dialog': options,
         'find_options': find_options,
         'dry_run': options.dry_run,
     }

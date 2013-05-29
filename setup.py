@@ -4,9 +4,20 @@
 # http://docs.python.org/2/distutils/examples.html
 
 import sys
+import os
 from setuptools import setup
+import ast
 
-version = '0.7'
+version = ''
+with open(os.path.join('reached', '__init__.py'), 'rU') as f:
+    for node in (n for n in ast.parse(f.read()).body if isinstance(n, ast.Assign)):
+        name = node.targets[0]
+        if isinstance(name, ast.Name) and name.id.startswith('__version__'):
+            version = node.value.s
+            break
+
+if not version:
+    raise RuntimeError('Unable to find version number')
 
 setup(
     name='reached',

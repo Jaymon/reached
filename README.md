@@ -47,6 +47,12 @@ you can do that by running:
 `Reached` will prompt for each replacement, so you don't have to worry about it changing something
 you didn't mean to change.
 
+Now, let's say that just searching for foo was too broad, `--find` can use any supported regex that
+Python's [re module](http://docs.python.org/2/library/re.html) uses, so let's say you instead wanted to
+only find foo's that are preceded by a space and followed by a period:
+
+    $ reached --find="(?<=\s)foo\." --replace="foo." --ext=py --dir=./
+
 ## License
 
 MIT

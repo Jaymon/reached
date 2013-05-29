@@ -111,7 +111,13 @@ class Dialog(ui.Dialog):
         btnDisplay.pack(side=LEFT, padx=5, pady=5)
 
         self.confirm_frame.update()
-        self.parent_frame.wait_window(self.confirm_frame)
+        try:
+            self.parent_frame.wait_window(self.confirm_frame)
+        except Tkinter.TclError:
+            # sometimes the wait_window fails, I'm not sure why, but it seems to be
+            # safe to just ignore it *shrug*
+            pass
+
         self.confirm_frame = None
       
     def confirm_silence(self):
@@ -288,7 +294,7 @@ class Gui(object):
             self.dText.delete(0, END)
             self.dText.insert(0,dirname)
   
-    def submit(self):
+    def submit(self, *_, **__):
         self.tk.update()
         top_frame = Tkinter.Toplevel(self.tk) # http://www.pythonware.com/library/tkinter/introduction/dialog-windows.htm
         top_frame.transient(self.tk)
